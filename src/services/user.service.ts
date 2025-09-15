@@ -10,7 +10,6 @@ import { buildUserFilter } from "../middlewares/query.middleware";
 import { DeleteResult, UpdateResult } from "mongoose";
 
 const createUser = async (data: CreateUserDTO): Promise<CreateUserDTO> => {
-  console.log(data);
   return User.create(data);
 };
 
