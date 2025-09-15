@@ -1,9 +1,10 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import { connectDB } from "./config/database";
 import logger from "morgan";
 import { config } from "./config";
 import cors from "cors";
 import { errorHandler } from "./middlewares/error.middleware";
+import userRouter from "./routes/user.route";
 
 const app = express();
 
@@ -17,7 +18,12 @@ app.use(
     origin: "*",
   })
 );
+app.use("/users", userRouter);
 app.use(errorHandler);
+
+app.get('/', (req: Request, res: Response) => {
+  res.send("Welcome to User Backend Server. 👋");
+});
 
 app.listen(config.PORT, () => {
   console.log(`🚀Server running on port:: ${config.PORT}`);
