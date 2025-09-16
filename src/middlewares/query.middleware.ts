@@ -33,6 +33,8 @@ export const buildUserFilter = (queryParams: UserFilter) => {
     query["$or"] = [
       { first_name: { $regex: searchRegex } },
       { last_name: { $regex: searchRegex } },
+      { gender: { $regex: searchRegex } },
+      { phone_number: { $regex: searchRegex } },
     ];
   }
 
