@@ -3,10 +3,6 @@ import { UserFilter } from "../interfaces/user.interface";
 
 export const buildUserFilter = (queryParams: UserFilter) => {
   const query: any = {};
-  if (queryParams?.first_name)
-    query["first_name"] = queryParams.first_name.toLowerCase();
-  if (queryParams?.last_name)
-    query["last_name"] = queryParams.last_name.toLowerCase();
 
   if (queryParams?.email) query["email"] = queryParams.email.toLowerCase();
   if (queryParams?.phone_number)
@@ -30,6 +26,14 @@ export const buildUserFilter = (queryParams: UserFilter) => {
       $gte: startDate,
       $lte: endDate,
     };
+  }
+
+  if (queryParams?.search) {
+    const searchRegex = new RegExp(queryParams.search, "i");
+    query["$or"] = [
+      { first_name: { $regex: searchRegex } },
+      { last_name: { $regex: searchRegex } },
+    ];
   }
 
   return query;
