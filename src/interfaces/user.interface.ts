@@ -16,6 +16,7 @@ export interface UserFilter {
   role?: string;
   email?: string;
   phone_number?: string;
+  search?: string;
   start_date?: string;
   end_date?: string;
   size?: number;
